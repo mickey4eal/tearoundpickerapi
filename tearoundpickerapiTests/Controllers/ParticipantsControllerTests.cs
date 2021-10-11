@@ -70,7 +70,7 @@ namespace tearoundpickerapi.Controllers.Tests
         }
 
         [TestMethod()]
-        public void GetParticipantsTest()
+        public async Task GetParticipantsTest()
         {
             var testContext = GetTestDbContext("list1");
             SetToDoRepository(testContext);
@@ -82,9 +82,9 @@ namespace tearoundpickerapi.Controllers.Tests
         }
 
         [TestMethod()]
-        public void GetParticipantTest()
+        public async Task GetParticipantTest()
         {
-            var testContext = GetTestDbContext("list1");
+            var testContext = GetTestDbContext("list2");
             SetToDoRepository(testContext);
             var participantController = ParticipantsControllerTest(testContext);
 
@@ -94,9 +94,9 @@ namespace tearoundpickerapi.Controllers.Tests
         }
 
         [TestMethod()]
-        public void PutParticipantTest()
+        public async Task PutParticipantTest()
         {
-            var testContext = GetTestDbContext("list1");
+            var testContext = GetTestDbContext("list3");
             SetToDoRepository(testContext);
             var participantController = ParticipantsControllerTest(testContext);
 
@@ -113,9 +113,9 @@ namespace tearoundpickerapi.Controllers.Tests
         }
 
         [TestMethod()]
-        public void PostParticipantTest()
+        public async Task PostParticipantTest()
         {
-            var testContext = GetTestDbContext("list1");
+            var testContext = GetTestDbContext("list4");
             SetToDoRepository(testContext);
             var participantController = ParticipantsControllerTest(testContext);
 
@@ -129,9 +129,9 @@ namespace tearoundpickerapi.Controllers.Tests
         }
 
         [TestMethod()]
-        public void DeleteParticipantTest()
+        public async Task DeleteParticipantTest()
         {
-            var testContext = GetTestDbContext("list1");
+            var testContext = GetTestDbContext("list5");
             SetToDoRepository(testContext);
             var participantController = ParticipantsControllerTest(testContext);
 

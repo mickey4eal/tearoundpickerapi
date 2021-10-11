@@ -28,21 +28,18 @@ namespace tearoundpickerapi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Participant>>> GetParticipants()
         {
-            return await _context.Participants.ToListAsync();
+            List<Participant> result = null;
+            await Task.Run(delegate () { result = participantRepository.GetAll(); });
+            return result;
         }
 
         // GET: api/Participants/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Participant>> GetParticipant(long id)
         {
-            var participant = await _context.Participants.FindAsync(id);
-
-            if (participant == null)
-            {
-                return NotFound();
-            }
-
-            return participant;
+            Participant result = null;
+            await Task.Run(delegate () { result = participantRepository.GetByID(id); });
+            return result;
         }
 
         // PUT: api/Participants/5
@@ -50,28 +47,7 @@ namespace tearoundpickerapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutParticipant(long id, Participant participant)
         {
-            if (id != participant.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(participant).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ParticipantExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await Task.Run(delegate () { participantRepository.Update(id, participant); });
 
             return NoContent();
         }
@@ -81,8 +57,7 @@ namespace tearoundpickerapi.Controllers
         [HttpPost]
         public async Task<ActionResult<Participant>> PostParticipant(Participant participant)
         {
-            _context.Participants.Add(participant);
-            await _context.SaveChangesAsync();
+            await Task.Run(delegate () { participantRepository.Insert(participant); });
 
             return CreatedAtAction(nameof(GetParticipant), new { id = participant.Id }, participant);
         }
@@ -91,21 +66,9 @@ namespace tearoundpickerapi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteParticipant(long id)
         {
-            var participant = await _context.Participants.FindAsync(id);
-            if (participant == null)
-            {
-                return NotFound();
-            }
-
-            _context.Participants.Remove(participant);
-            await _context.SaveChangesAsync();
+            await Task.Run(delegate () { participantRepository.Delete(id); });
 
             return NoContent();
-        }
-
-        private bool ParticipantExists(long id)
-        {
-            return _context.Participants.Any(e => e.Id == id);
         }
     }
 }

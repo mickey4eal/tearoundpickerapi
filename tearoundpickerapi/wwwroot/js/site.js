@@ -171,11 +171,11 @@ function _displayItems(data) {
 
 var GetDrinkMaker = function () {
     //debugger;
-    var drinkMakers = participants;
+    var drinkMakers = participants.filter(item => item.wantsADrink === true);
     var i;
 
     for (i = 0; i < drinkMakers.length; i++) {
         var drinkMaker = drinkMakers[Math.floor(Math.random() * drinkMakers.length)];
-        document.getElementById('teamaker').innerText = drinkMaker.name;
+        document.getElementById('teamaker').innerText = "The tea maker gods have decided!\n " + drinkMaker.name + ", it's your round to make hot drinks.";
     }
 };

@@ -11,6 +11,5 @@ namespace tearoundpickerapi.Models
         public string Name { get; set; }
         public string DrinkPreference { get; set; }
         public bool WantsADrink { get; set; }
-        public bool IsTeaMaker { get; set; }
     }
 }
