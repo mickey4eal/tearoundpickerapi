@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tearoundpickerapi", "tearoundpickerapi.csproj", "{E093E28D-D5A5-4141-B7ED-455A9FD090BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tearoundpickerapiTests", "..\tearoundpickerapiTests\tearoundpickerapiTests.csproj", "{01FF379B-8DE2-4E27-B4E9-AE3F4F03E326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E093E28D-D5A5-4141-B7ED-455A9FD090BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E093E28D-D5A5-4141-B7ED-455A9FD090BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E093E28D-D5A5-4141-B7ED-455A9FD090BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01FF379B-8DE2-4E27-B4E9-AE3F4F03E326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01FF379B-8DE2-4E27-B4E9-AE3F4F03E326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01FF379B-8DE2-4E27-B4E9-AE3F4F03E326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01FF379B-8DE2-4E27-B4E9-AE3F4F03E326}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

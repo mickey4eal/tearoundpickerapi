@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tea Round Picker</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <h1>Tea Round Picker</h1>
+    <h3>Add Participant</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+        <input type="text" id="add-name" placeholder="New Participant">
+        <input type="text" id="add-drinkPreference" placeholder="Drink Preference">
+        <input type="submit" value="Add">
+    </form>
+
+    <div id="editForm">
+        <h3>Edit</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <input type="hidden" id="edit-id">
+            <input type="checkbox" id="edit-wantsADrink">
+            <input type="text" id="edit-name">
+            <input type="text" id="edit-drinkPreference">
+            <input type="hidden" id="edit-isTeaMaker">
+            <input type="submit" value="Save">
+            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </form>
+    </div>
+
+    <p id="counter"></p>
+
+    <table>
+        <tr>
+            <th>Wants A Drink?</th>
+            <th>Name</th>
+            <th>Drink Preference</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tbody id="participants"></tbody>
+    </table>
+
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getItems();
+    </script>
+
+    <div>
+        <p></p>
+        <button id="getteamaker" value="Tea Maker" onclick="GetDrinkMaker();">Get Tea Maker</button>
+        <p id="teamaker"></p>
+        <!--<p action="javascript:void(0);" onsubmit="getTeaMaker()">
+        <input type="hidden" id="edit-isTeaMaker">
+        <input type="submit" value="Get Tea Maker">
+    </p>-->
+    </div>
+
+    <!--<table>
+        <tr>
+            <th>Tea Maker</th>
+        </tr>
+        <tbody id="teaMaker"></tbody>
+    </table>-->
+</body>
+</html>

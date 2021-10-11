@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace tearoundpickerapi.Models
+namespace tearoundpickerapi.Models.DTO
 {
-    public class Participant
+    public class ParticipantDTO
     {
         public long Id { get; set; }
         public string Name { get; set; }

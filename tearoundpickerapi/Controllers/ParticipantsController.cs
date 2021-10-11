@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using tearoundpickerapi.Data;
 using tearoundpickerapi.Models;
+using tearoundpickerapi.Services;
 
 namespace tearoundpickerapi.Controllers
 {
@@ -15,10 +16,12 @@ namespace tearoundpickerapi.Controllers
     public class ParticipantsController : ControllerBase
     {
         private readonly ParticipantContext _context;
+        private readonly IParticipantRepository participantRepository;
 
         public ParticipantsController(ParticipantContext context)
         {
             _context = context;
+            participantRepository = new ParticipantRepository(_context);
         }
 
         // GET: api/Participants
@@ -81,7 +84,7 @@ namespace tearoundpickerapi.Controllers
             _context.Participants.Add(participant);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetParticipant", new { id = participant.Id }, participant);
+            return CreatedAtAction(nameof(GetParticipant), new { id = participant.Id }, participant);
         }
 
         // DELETE: api/Participants/5
