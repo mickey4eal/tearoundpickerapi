@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using tearoundpickerapi.Data;
 using tearoundpickerapi.Models;
 using tearoundpickerapi.Services;
@@ -29,7 +25,7 @@ namespace tearoundpickerapi.Controllers
         public async Task<ActionResult<IEnumerable<Participant>>> GetParticipants()
         {
             List<Participant> result = null;
-            await Task.Run(delegate () { result = participantRepository.GetAll(); });
+            await Task.Run(() => { result = participantRepository.GetAll(); });
             return result;
         }
 
@@ -38,7 +34,7 @@ namespace tearoundpickerapi.Controllers
         public async Task<ActionResult<Participant>> GetParticipant(long id)
         {
             Participant result = null;
-            await Task.Run(delegate () { result = participantRepository.GetByID(id); });
+            await Task.Run(() => { result = participantRepository.GetByID(id); });
             return result;
         }
 
@@ -47,7 +43,7 @@ namespace tearoundpickerapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutParticipant(long id, Participant participant)
         {
-            await Task.Run(delegate () { participantRepository.Update(id, participant); });
+            await Task.Run(() => { participantRepository.Update(id, participant); });
 
             return NoContent();
         }
@@ -57,7 +53,7 @@ namespace tearoundpickerapi.Controllers
         [HttpPost]
         public async Task<ActionResult<Participant>> PostParticipant(Participant participant)
         {
-            await Task.Run(delegate () { participantRepository.Insert(participant); });
+            await Task.Run(() => { participantRepository.Insert(participant); });
 
             return CreatedAtAction(nameof(GetParticipant), new { id = participant.Id }, participant);
         }
@@ -66,7 +62,7 @@ namespace tearoundpickerapi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteParticipant(long id)
         {
-            await Task.Run(delegate () { participantRepository.Delete(id); });
+            await Task.Run(() => { participantRepository.Delete(id); });
 
             return NoContent();
         }

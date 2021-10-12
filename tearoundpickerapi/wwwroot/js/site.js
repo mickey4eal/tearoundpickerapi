@@ -1,5 +1,6 @@
 ﻿const uri = 'api/Participants';
 let participants = [];
+let drinkMakers = [];
 
 function getItems() {
     fetch(uri)
@@ -132,50 +133,16 @@ function _displayItems(data) {
         td5.appendChild(deleteButton);
     });
 
-    participants = data;
+    participants = data.filter(item => item.wantsADrink === true);
+    //drinkMakers = participants.filter(item => item.wantsADrink === true);
 }
 
-//function getTeaMaker() {
-//    const tBody = document.getElementById('teaMaker');
-//    tBody.innerHTML = '';
-
-//    randomlySelectTeaMaker(data);
-//}
-
-//function randomlySelectTeaMaker(data) {
-//    drinkMaker = data;
-
-//    //const tBody = document.getElementById('teaMaker');
-//    //tBody.innerHTML = '';
-
-//    //data.forEach(item => {
-//    //    let isTeaMakerCheckbox = document.createElement('input');
-//    //    isTeaMakerCheckbox.type = 'checkbox';
-//    //    isTeaMakerCheckbox.disabled = true;
-//    //    isTeaMakerCheckbox.checked = item.isTeaMaker;
-
-//    //    let tr = tBody.insertRow();
-
-//    //    let td1 = tr.insertCell(0);
-//    //    td1.appendChild(isTeaMakerCheckbox);
-
-//    //    let td2 = tr.insertCell(1);
-//    //    let textNode = document.createTextNode("Test Name");//item.name
-//    //    td2.appendChild(textNode);
-//    //});
-
-//    //drinkMaker = data;
-
-//    //return false;
-//}
-
 var GetDrinkMaker = function () {
-    //debugger;
-    var drinkMakers = participants.filter(item => item.wantsADrink === true);
+    //var drinkMakers = participants.filter(item => item.wantsADrink === true);
     var i;
 
-    for (i = 0; i < drinkMakers.length; i++) {
-        var drinkMaker = drinkMakers[Math.floor(Math.random() * drinkMakers.length)];
+    for (i = 0; i < participants.length; i++) {
+        var drinkMaker = participants[Math.floor(Math.random() * participants.length)];
         document.getElementById('teamaker').innerText = "The tea maker gods have decided!\n " + drinkMaker.name + ", it's your round to make hot drinks.";
     }
 };

@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using tearoundpickerapi.Controllers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit.Sdk;
 using tearoundpickerapi.Data;
@@ -23,38 +20,48 @@ namespace tearoundpickerapi.Controllers.Tests
             return new ParticipantContext(dbContextOptionBuilder.Options);
         }
 
-        public static void SetToDoRepository(ParticipantContext participantContext)
+        public static void SetEmptyToDoRepository(ParticipantContext participantContext)
+        {
+            var noParticipants = new List<Participant>
+            {};
+
+            participantContext.Participants.AddRange(noParticipants);
+
+            participantContext.SaveChanges();
+        }
+
+            public static void SetToDoRepository(ParticipantContext participantContext)
         {
             var initialParticipants = new List<Participant>
             {
                 new Participant
                 {
                     Id = 1,
-                    Name = "feed cat",
+                    Name = "Dave",
                     WantsADrink = true
                 },
                 new Participant
                 {
                     Id = 2,
-                    Name = "feed cat",
+                    Name = "Ed",
                     WantsADrink = true
                 },
                 new Participant
                 {
                     Id = 3,
-                    Name = "feed cat",
+                    Name = "Karen",
                     WantsADrink = true
                 },
                 new Participant
                 {
                     Id = 4,
-                    Name = "feed cat",
+                    Name = "Chris",
                     WantsADrink = true
                 },
                 new Participant
                 {
                     Id = 5,
-                    Name = "feed cat",
+                    Name = "Michael",
                     WantsADrink = true
                 }
             };
@@ -90,7 +97,7 @@ namespace tearoundpickerapi.Controllers.Tests
 
             var result = await participantController.GetParticipant(2);
 
-            Assert.AreEqual("feed cat", result.Value.Name);
+            Assert.AreEqual("Ed", result.Value.Name);
         }
 
         [TestMethod()]
@@ -103,13 +110,13 @@ namespace tearoundpickerapi.Controllers.Tests
             await participantController.PutParticipant(3, new Participant()
             {
                 Id = 3,
-                Name = "feed cat",
+                Name = "Victor",
                 WantsADrink = true
             });
 
             var result = await participantController.GetParticipant(3);
 
-            Assert.AreEqual("feed cat", result.Value.Name);
+            Assert.AreEqual("Victor", result.Value.Name);
         }
 
         [TestMethod()]
@@ -121,7 +128,7 @@ namespace tearoundpickerapi.Controllers.Tests
 
             await participantController.PostParticipant(new Participant()
             {
-                Name = "feed bird",
+                Name = "Judy",
                 WantsADrink = true
             });
 
@@ -138,6 +145,49 @@ namespace tearoundpickerapi.Controllers.Tests
             await participantController.DeleteParticipant(1);
 
             Assert.AreEqual(4, testContext.Participants.Count());
+        }
+
+        [TestMethod()]
+        public Task NoParticipantTest()
+        {
+            var testContext = GetTestDbContext("list6");
+            SetEmptyToDoRepository(testContext);
+            var participantController = ParticipantsControllerTest(testContext);
+
+            //var tasks = new List<Task>();
+            //var threads = 100;
+            //var iterations = 100;
+
+            //for (int i = 0; i < threads; i++)
+            //{
+            //    tasks.Add(Task.Factory.StartNew(async () =>
+            //    {
+            //        for (int j = 0; j < iterations; j++)
+            //        {
+            //            await participantController.PostParticipant(new Participant()
+            //            {
+            //                Name = "feed bird",
+            //                WantsADrink = true
+            //            });
+            //        }
+            //    }));
+            //}
+
+            var max = 100;
+
+            Parallel.For(0, max, i =>
+            {
+                _ = participantController.PostParticipant(new Participant()
+                {
+                    Name = "participant " + i,
+                    WantsADrink = true
+                });
+            });
+
+            //Task.WaitAll(tasks.ToArray());
+
+            Assert.AreEqual(100, testContext.Participants.Count());
+            return Task.CompletedTask;
         }
     }
 }

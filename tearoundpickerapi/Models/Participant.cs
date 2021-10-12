@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace tearoundpickerapi.Models
+﻿namespace tearoundpickerapi.Models
 {
     public class Participant
     {
