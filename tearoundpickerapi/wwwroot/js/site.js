@@ -1,6 +1,5 @@
 ﻿const uri = 'api/Participants';
-let participants = [];
-let drinkMakers = [];
+let roundParticipants = [];
 
 function getItems() {
     fetch(uri)
@@ -47,7 +46,7 @@ function deleteItem(id) {
 }
 
 function displayEditForm(id) {
-    const item = participants.find(item => item.id === id);
+    const item = roundParticipants.find(item => item.id === id);
 
     document.getElementById('edit-name').value = item.name;
     document.getElementById('edit-drinkPreference').value = item.drinkPreference;
@@ -133,16 +132,14 @@ function _displayItems(data) {
         td5.appendChild(deleteButton);
     });
 
-    participants = data.filter(item => item.wantsADrink === true);
-    //drinkMakers = participants.filter(item => item.wantsADrink === true);
+    roundParticipants = data.filter(item => item.wantsADrink === true);
 }
 
 var GetDrinkMaker = function () {
-    //var drinkMakers = participants.filter(item => item.wantsADrink === true);
     var i;
 
-    for (i = 0; i < participants.length; i++) {
-        var drinkMaker = participants[Math.floor(Math.random() * participants.length)];
+    for (i = 0; i < roundParticipants.length; i++) {
+        var drinkMaker = roundParticipants[Math.floor(Math.random() * roundParticipants.length)];
         document.getElementById('teamaker').innerText = "The tea maker gods have decided!\n " + drinkMaker.name + ", it's your round to make hot drinks.";
     }
 };

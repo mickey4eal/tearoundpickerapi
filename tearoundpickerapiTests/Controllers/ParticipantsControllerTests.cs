@@ -148,46 +148,40 @@ namespace tearoundpickerapi.Controllers.Tests
         }
 
         [TestMethod()]
-        public Task NoParticipantTest()
+        public async Task NoParticipantTest()
         {
             var testContext = GetTestDbContext("list6");
             SetEmptyToDoRepository(testContext);
             var participantController = ParticipantsControllerTest(testContext);
 
-            //var tasks = new List<Task>();
-            //var threads = 100;
-            //var iterations = 100;
+            var tasks = new List<Task>();
+            var threadsCount = 100;
+            //var iterations = 1;
 
-            //for (int i = 0; i < threads; i++)
-            //{
-            //    tasks.Add(Task.Factory.StartNew(async () =>
-            //    {
-            //        for (int j = 0; j < iterations; j++)
-            //        {
-            //            await participantController.PostParticipant(new Participant()
-            //            {
-            //                Name = "feed bird",
-            //                WantsADrink = true
-            //            });
-            //        }
-            //    }));
-            //}
-
-            var max = 100;
-
-            Parallel.For(0, max, i =>
+            for (int i = 0; i < threadsCount; i++)
             {
-                _ = participantController.PostParticipant(new Participant()
+                tasks.Add(Task.Factory.StartNew(async () =>
                 {
-                    Name = "participant " + i,
-                    WantsADrink = true
-                });
-            });
+                    //for (int j = 0; j < iterations; j++)
+                    //{
+                        await participantController.PostParticipant(new Participant()
+                        {
+                            Name = "participant "+i,
+                            WantsADrink = true
+                        });
+                    //}
+                }));
+            }
 
-            //Task.WaitAll(tasks.ToArray());
+            //await participantController.PostParticipant(new Participant()
+            //    {
+            //        Name = "participant",
+            //        WantsADrink = true
+            //    });
+
+            await Task.WhenAll(tasks.ToArray());
 
             Assert.AreEqual(100, testContext.Participants.Count());
-            return Task.CompletedTask;
         }
     }
 }
