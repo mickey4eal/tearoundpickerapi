@@ -1,10 +1,10 @@
 # HOW TO RUN SOLUTION
 
-1 Open the solution using Visual Studio.
-2 To start solution without debugging, **press Ctrl + F5**. The solution should start running and a "Tea Round Picker" web browser will pop up.
-3 Follow the instruction on the web page to populate the list of tea drinkers/participants.
-4 Once you've entered the desired amount of tea drinkers, click the "Get Tea Maker" button.
-5 A tea maker will be selected.
+- Open the solution using Visual Studio.
+- To start solution without debugging, **press Ctrl + F5**. The solution should start running and a "Tea Round Picker" web browser will pop up.
+- Follow the instruction on the web page to populate the list of tea drinkers/participants.
+- Once you've entered the desired amount of tea drinkers, click the "Get Tea Maker" button.
+- A tea maker will be selected.
 
 # MODIFYING THE LIST OF PARTICIPANTS
 ## Deleting Participants
