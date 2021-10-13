@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/tearoundpickerapi/Data/IDbContext.cs
+/tearoundpickerapi/Data/TestDbContext.cs
